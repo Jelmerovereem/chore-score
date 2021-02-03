@@ -1,0 +1,19 @@
+{
+  "name": "chore-score",
+  "version": "1.0.0",
+  "description": "An web-app to keep track of your household's chores.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jelmerovereem/chore-score.git"
+  },
+  "author": "Jelmer Overeem <jelmer_overeem@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jelmerovereem/chore-score/issues"
+  },
+  "homepage": "https://github.com/Jelmerovereem/chore-score#readme"
+}
