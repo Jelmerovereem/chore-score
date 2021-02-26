@@ -1,0 +1,21 @@
+main {
+	margin: -70px 20px 0 20px;
+}
+
+main p.subtitle {
+	font-weight: 500;
+}
+
+main p.subtitle:first-child {
+	color: white;
+}
+
+.container {
+	padding: 10px 0;
+	margin-bottom: 50px;
+}
+
+.container p {
+	color: var(--color-grey);
+	margin-left: 10px;
+}

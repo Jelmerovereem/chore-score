@@ -7,6 +7,24 @@
 </head>
 <%- include("partials/head") %>
 <body>
-	<h1>Welcome to ChoreScore!</h1>
+	<%- include("partials/nav") %>
+	<header>
+		<div class="flex">
+			<h1><%= userData.household %></h1>
+			<a href=""><img src="assets/message.svg" alt=""></a>
+		</div>
+	</header>
+	<main>
+		<p class="subtitle">Scorelijst</p>
+		<div class="container">
+			<% householdUsers.forEach(function(user) { %>
+				<p><%= user.userName %></p>
+			<% }) %>
+		</div>
+		<p class="subtitle">Jouw scores</p>
+		<div class="container">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos eos quas dolor nihil minus rem quae, inventore, velit blanditiis quos.</p>
+		</div>
+	</main>
 </body>
 </html>

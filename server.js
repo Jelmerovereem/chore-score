@@ -1,3 +1,5 @@
+// require cloudinary
+const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
 // require express npm package
@@ -12,6 +14,7 @@ const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({
   extended: true
 });
+
 
 // init app
 const app = express();
@@ -29,6 +32,7 @@ app.set("view engine", "ejs");
 
 app.get("/", renderHome);
 app.get("/login", renderLogin);
+app.get("/userProfile", renderProfile);
 
 app.post("/checkLogin", checkLogin);
 
@@ -43,12 +47,19 @@ mongo.MongoClient.connect(url, (err, client) => {
 	db = client.db(process.env.DB_NAME);
 });
 
-function renderHome(req, res) {
+async function renderHome(req, res) {
 	console.log(req.session)
 	if (!req.session.user) {
 		res.redirect("/login")
 	} else {
-		res.render("score.ejs");
+		const allUsers = await db.collection("users").find().toArray();
+		const householdUsers = allUsers.filter(obj => obj.household === req.session.user.household);
+		console.log(householdUsers)
+		res.render("score.ejs", {
+			userData: req.session.user,
+			householdUsers,
+			page_name: "score"
+		});
 	}
 }
 
@@ -58,6 +69,17 @@ function renderLogin(req, res) {
 		res.render("login.ejs");
 	} else {
 		res.redirect("/");
+	}
+}
+
+function renderProfile(req, res) {
+	if (!req.session.user) {
+		res.redirect("/login");
+	} else {
+		res.render("userProfile.ejs", {
+			userData: req.session.user,
+			page_name: "userProfile"
+		})
 	}
 }
 
@@ -96,13 +118,18 @@ function sendResponse(req, res, data) {
 
 function createUser() {
 	db.collection("users").insertOne({
-		userName: "Jelmer",
-		userPassword: "windoos20",
-		email: "jelmer_overeem@hotmail.com"
+		userName: "eva",
+		userPassword: "hoi",
+		email: "evaspoor@hotmail.com",
+		household: "Rosendahl"
 	}, (err) => {
 		console.log(err)
 	})
 }
+
+/*setTimeout(() => {
+	createUser()
+}, 5000)*/
 
 
 app.listen(process.env.PORT || 4000, () => console.log("server is running on port 4000"));

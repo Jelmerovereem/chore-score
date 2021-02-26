@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<%- include("partials/head") %>
+<body>
+	<%- include("partials/nav") %>
+	<header>
+		<div class="flex">
+			<h1><%= userData.userName %></h1>
+			<a href=""><img src="assets/message.svg" alt=""></a>
+		</div>
+	</header>
+	<main>
+		<p class="subtitle">Jouw profiel</p>
+		<div class="container">
+			<label for="profilePicture">
+			<input type="file" id="profilePicture">
+			<img src="<%= userData.profileImg %>" alt="">
+			<a href="javascript:void(0)" class="changeProfilePic">Verander</a>
+			</label>
+			<p><%= userData.userName %></p>
+			<p><%= userData.email %></p>
+		</div>
+	</main>
+	<script src="scripts/main.js" type="module"></script>
+</body>
+</html>

@@ -6,6 +6,6 @@ function getFetch(url) {
 }
 
 function postFetch(url, data) {
-	return fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
-	.then(response => response.ok ? response.json() : console.log(response.ok));
+	return fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: data})
+	.then(response => response.ok ? response.json() : console.log(response));
 }

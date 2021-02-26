@@ -7,7 +7,7 @@ export default function login() {
 			userName: userNameInput.value,
 			userPassword: userPasswordInput.value
 		}
-		postFetch("/checkLogin", userInputs)
+		postFetch("/checkLogin", JSON.stringify(userInputs))
 		.then(data => {
 			if (data.status === "ok") {
 				localStorage.setItem("userName", userNameInput.value)
