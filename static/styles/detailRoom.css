@@ -1,0 +1,93 @@
+header {
+	background: linear-gradient(120deg, #8edc8fbf, #3fbfb2c4), url();
+}
+
+.container.chores a {
+	display: flex;
+	justify-content: space-between;
+	text-decoration: none;
+	color: var(--color-grey);
+	width: 95%;
+	margin: 0 auto;
+	border-bottom: 1px solid var(--color-line);
+	padding: 10px 0;
+}
+
+.choreModal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.4);
+	z-index: 1;
+}
+
+.choreContent {
+	width: 95%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modalHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.closeModal {
+	color: white;
+	font-size: 3em;
+}
+
+.choreTitle {
+	color: white;
+	text-transform: capitalize;
+}
+
+.innerModal {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+label[for="datePicker"], label[for="notes"] {
+	color: var(--color-grey);
+}
+
+.modalDatepicker {
+	background: white;
+	border: 1px solid var(--color-grey);
+	border-radius: 6px;
+	padding: 7px 0 7px 5px;
+	color: var(--color-grey);
+}
+
+.innerModal p {
+	margin: 0;
+	margin-top: 20px;
+}
+
+label[for="evidencePic"] {
+	border: 1px dashed var(--color-grey);
+	padding: 32px 102px 30px 102px;
+	margin-bottom: 20px;
+}
+
+#evidencePic {
+	display: none;
+}
+
+label[for="evidencePic"] svg {
+	display: block;
+	margin: 10px auto;
+}
+
+#notes {
+	border-color: var(--color-grey);
+	font-family: inherit;
+}

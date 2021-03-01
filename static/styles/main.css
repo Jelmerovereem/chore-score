@@ -1,5 +1,7 @@
 @import "header.css";
 @import "score.css";
+@import "profile.css";
+@import "rooms.css";
 
 * {
 	--color-lightgreen: #8EDC8F;
@@ -41,6 +43,19 @@ body {
 	width: 80%;
 }
 
+.secondaryBtn {
+	display: block;
+	border-radius: 50px;
+	border: 1px solid var(--color-lightgreen);
+	color: var(--color-grey);
+	font-size: 1em;
+	font-weight: 300;
+	text-decoration: none;
+	text-align: center;
+	padding: 10px 0;
+	width: 100%;
+}
+
 nav {
 	position: fixed;
 	bottom: 0;
@@ -58,12 +73,17 @@ nav {
 	height: 35px;
 	border-radius: 100%;
 	overflow: hidden;
+	position: relative;
 }
 
 nav img {
 	display: inline-block;
 	width: 35px;
 	height: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 nav .current svg path {

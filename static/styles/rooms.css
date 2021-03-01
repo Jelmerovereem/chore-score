@@ -1,0 +1,44 @@
+.roomGrid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 10px;
+}
+
+.roomLink {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+}
+
+.roomGrid p {
+	margin: 0;
+	text-align: center;
+}
+
+.roomGrid .container {
+	position: relative;
+}
+
+.imgWrapper {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	width: 120px;
+	height: 120px;
+	margin: auto;
+	border-radius: 100%;
+}
+
+.imgWrapper img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}

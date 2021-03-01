@@ -33,8 +33,12 @@ app.set("view engine", "ejs");
 app.get("/", renderHome);
 app.get("/login", renderLogin);
 app.get("/userProfile", renderProfile);
+app.get("/rooms", renderRooms);
+app.get("/rooms/:room", renderDetailRoom);
+app.get("/signout", signout);
 
 app.post("/checkLogin", checkLogin);
+app.post("/changePic", changeProfilePic);
 
 const url = process.env.DB_HOST + ':' + process.env.DB_PORT;
 
@@ -83,6 +87,40 @@ function renderProfile(req, res) {
 	}
 }
 
+async function renderRooms(req, res) {
+	if (!req.session.user) {
+		res.redirect("/login");
+	} else {
+		const household = await db.collection("household-chores").findOne({household: req.session.user.household});
+		console.log(household);
+		res.render("rooms.ejs", {
+			userData: req.session.user,
+			page_name: "trackChore",
+			household
+		})
+	}
+}
+
+async function renderDetailRoom(req, res) {
+	if (!req.session.user) {
+		res.redirect("/login");
+	} else {
+		const givenParam = req.params.room;
+		const household = await db.collection("household-chores").findOne({household: req.session.user.household});
+		const room = household.rooms.find(obj => obj.room === givenParam);
+		res.render("detailRoom.ejs", {
+			userData: req.session.user,
+			page_name: "trackChore",
+			room
+		})
+	}
+}
+
+function signout(req, res) {
+	req.session.destroy(err => err ? console.log(err) : "");
+	res.redirect("/");
+}
+
 async function checkLogin(req, res) {
 	const allUsers = await db.collection("users").find().toArray();
 	const userObj = allUsers.find(obj => obj.userName === req.body.userName.toLowerCase()); // find user
@@ -111,6 +149,18 @@ async function checkLogin(req, res) {
 	}
 }
 
+function changeProfilePic(req, res) {
+	const profileImgUrl = req.body.imgUrl;
+
+	db.collection("users").updateOne({email: req.session.user.email}, {$set: {profileImg: profileImgUrl}}, (err) => {
+		if (err) console.log(err)
+			else {
+				req.session.user.profileImg = profileImgUrl;
+				sendResponse(req, res, {status: "ok", profileImgUrl});
+			}
+	})
+}
+
 function sendResponse(req, res, data) {
 	res.setHeader("Content-Type", "application/json");
 	res.send(JSON.stringify(data));
@@ -130,6 +180,5 @@ function createUser() {
 /*setTimeout(() => {
 	createUser()
 }, 5000)*/
-
 
 app.listen(process.env.PORT || 4000, () => console.log("server is running on port 4000"));

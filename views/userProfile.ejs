@@ -18,12 +18,15 @@
 		<p class="subtitle">Jouw profiel</p>
 		<div class="container">
 			<label for="profilePicture">
-			<input type="file" id="profilePicture">
-			<img src="<%= userData.profileImg %>" alt="">
-			<a href="javascript:void(0)" class="changeProfilePic">Verander</a>
+				<input type="file" id="profilePicture">
+				<a href="javascript:void(0)" class="changeProfilePic">
+					<%- include("../static/assets/edit.svg") %>
+				</a>
+				<img src="<%= userData.profileImg %>" class="profileImg" alt="">
 			</label>
 			<p><%= userData.userName %></p>
 			<p><%= userData.email %></p>
+			<a href="/signout">Uitloggen</a>
 		</div>
 	</main>
 	<script src="scripts/main.js" type="module"></script>

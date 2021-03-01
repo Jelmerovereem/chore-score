@@ -1,4 +1,4 @@
-export { getFetch, postFetch };
+export { getFetch, postFetch, postExternFetch };
 
 function getFetch(url) {
 	return fetch(url)
@@ -7,5 +7,10 @@ function getFetch(url) {
 
 function postFetch(url, data) {
 	return fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: data})
+	.then(response => response.ok ? response.json() : console.log(response));
+}
+
+function postExternFetch(url, data) {
+	return fetch(url, {method: "POST", body: data})
 	.then(response => response.ok ? response.json() : console.log(response));
 }

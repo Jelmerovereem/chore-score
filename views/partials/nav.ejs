@@ -1,5 +1,5 @@
 <nav>
-	<a href="" <% if (page_name === "trackChore") { %>class="current"<% } %>>
+	<a href="/rooms" <% if (page_name === "trackChore") { %>class="current"<% } %>>
 		<%- include("../../static/assets/trackChore.svg") %>
 	</a>
 	<a href="/" <% if (page_name === "score") { %>class="current"<% } %>>
@@ -9,6 +9,6 @@
 		<%- include("../../static/assets/calendar.svg") %>
 	</a>
 	<a href="/userProfile" id="navImgWrapper" <% if (page_name === "userProfile") { %>class="current"<% } %> >
-		<img src="https://jelmerovereem.github.io/kickoff-2021/assets/avatar.jpg" alt="">
+		<img src="<%= userData.profileImg %>" alt="">
 	</a>
 </nav>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<%- include("partials/head") %>
+<body>
+	<%- include("partials/nav") %>
+	<header>
+		<h1>Voeg nieuwe klus toe</h1>
+	</header>
+	<main>
+		<p class="subtitle">Categorieën</p>
+		<div class="roomGrid">
+			<% household.rooms.forEach(function(room) { %>
+				<div class="container">
+					<a href="/rooms/<%= room.room %>" class="roomLink"></a>
+					<div class="imgWrapper">
+						<img src="<%= room.roomImg %>" alt="">
+					</div>
+					<p><%= room.room %></p>
+				</div>
+			<% }) %>
+		</div>
+	</main>
+</body>
+</html>

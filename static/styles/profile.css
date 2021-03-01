@@ -1,0 +1,44 @@
+#profilePicture {
+	display: none;
+}
+
+label[for="profilePicture"] {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	width: 60%;
+	height: 220px;
+	margin: auto;
+	border-radius: 100%;
+}
+
+label[for="profilePicture"] a {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	background: var(--gradient-gt);
+	opacity: .5;
+	z-index: 2;
+	pointer-events: none;
+}
+
+label[for="profilePicture"] a>svg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+label[for="profilePicture"] img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	z-index: 1;
+}
