@@ -17,5 +17,27 @@ main p.subtitle:first-child {
 
 .container p {
 	color: var(--color-grey);
-	margin-left: 10px;
+}
+
+.userName {
+	text-transform: capitalize;
+}
+
+.userBar {
+	width: 90%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 25% 50% 25%;
+	grid-gap: 5px;
+	align-items: center;
+}
+
+.pointsBar {
+	background: var(--gradient-gt);
+	height: 7px;
+	border-radius: 10px;
+}
+
+.userPoints {
+	justify-self: end;
 }

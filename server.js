@@ -39,6 +39,7 @@ app.get("/signout", signout);
 
 app.post("/checkLogin", checkLogin);
 app.post("/changePic", changeProfilePic);
+app.post("/saveChore", saveChore);
 
 const url = process.env.DB_HOST + ':' + process.env.DB_PORT;
 
@@ -52,13 +53,11 @@ mongo.MongoClient.connect(url, (err, client) => {
 });
 
 async function renderHome(req, res) {
-	console.log(req.session)
 	if (!req.session.user) {
 		res.redirect("/login")
 	} else {
 		const allUsers = await db.collection("users").find().toArray();
 		const householdUsers = allUsers.filter(obj => obj.household === req.session.user.household);
-		console.log(householdUsers)
 		res.render("score.ejs", {
 			userData: req.session.user,
 			householdUsers,
@@ -68,7 +67,6 @@ async function renderHome(req, res) {
 }
 
 function renderLogin(req, res) {
-	console.log(req.session)
 	if (!req.session.user) {
 		res.render("login.ejs");
 	} else {
@@ -92,7 +90,6 @@ async function renderRooms(req, res) {
 		res.redirect("/login");
 	} else {
 		const household = await db.collection("household-chores").findOne({household: req.session.user.household});
-		console.log(household);
 		res.render("rooms.ejs", {
 			userData: req.session.user,
 			page_name: "trackChore",
@@ -130,7 +127,6 @@ async function checkLogin(req, res) {
 				status: "ok"
 			}
 			req.session.user = userObj;
-			console.log(req.session)
 			res.setHeader("Content-Type", "application/json");
 			res.send(JSON.stringify(data));
 		} else { // user found but password not right
@@ -157,6 +153,32 @@ function changeProfilePic(req, res) {
 			else {
 				req.session.user.profileImg = profileImgUrl;
 				sendResponse(req, res, {status: "ok", profileImgUrl});
+			}
+	})
+}
+
+async function saveChore(req, res) {
+	const myUserData = await db.collection("users").findOne({email: req.session.user.email});
+	const finishedChoresArray = myUserData.finishedChores;
+	const choreDate = req.body.dateAndTime.split("T")[0];
+	let todaysObject = finishedChoresArray.find(obj => obj.date === choreDate);
+	if (todaysObject === undefined) {
+		let todaysChores = [];
+		todaysChores.push(req.body);
+		let todaysObj = {
+			date: choreDate,
+			todaysChores
+		}
+		finishedChoresArray.push(todaysObj)
+	} else {
+		todaysObject.todaysChores.push(req.body);
+		let choresObjIndex = finishedChoresArray.findIndex((obj => obj.date === choreDate));
+		finishedChoresArray[choresObjIndex].todaysChores = todaysObject.todaysChores;
+	};
+	db.collection("users").updateOne({email: req.session.user.email}, {$set: {finishedChores: finishedChoresArray}}, (err) => {
+		if (err) console.log(err)
+			else {
+				sendResponse(req, res, {status: "ok"});
 			}
 	})
 }

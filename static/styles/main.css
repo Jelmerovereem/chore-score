@@ -66,6 +66,7 @@ nav {
 	align-items: center;
 	justify-content: space-around;
 	justify-content: space-evenly;
+	z-index: 1;
 }
 
 #navImgWrapper {

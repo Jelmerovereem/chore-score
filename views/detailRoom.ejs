@@ -18,7 +18,7 @@
 			<% room.chores.forEach(function(chore) { %>
 				<a href="javascript:void(0)" data-choreName="<%= chore.choreName %>">
 					<span><%= chore.choreName %></span>
-					<span><%= chore.points %></span>
+					<span class="points"><%= chore.points %></span>
 				</a>
 			<% }) %>
 		</div>
@@ -30,15 +30,16 @@
 				</div>
 				<div class="innerModal container">
 					<label for="datePicker">Datum</label>
-					<input type="date" id="datePicker" class="modalDatepicker">
+					<input type="datetime-local" id="datePicker" class="modalDatepicker">
 					<p>Bewijs</p>
 					<label for="evidencePic">
 						<input type="file" id="evidencePic">
 						<%- include("../static/assets/upload.svg") %>
 						<a href="javascript:void(0)" class="secondaryBtn">Upload</a>
 					</label>
+					<img class="evidencePhoto" alt="">
 					<label for="notes">Notities</label>
-					<textarea name="" id="notes" cols="30" rows="10"></textarea>
+					<span><textarea name="" id="notes"></textarea></span>
 					<a href="javascript:void(0)" class="primaryBtn saveChore">Opslaan</a>
 				</div>
 			</div>
