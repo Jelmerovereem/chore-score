@@ -1,0 +1,10 @@
+{
+	"short_name": "Chore Score",
+	"name": "Chore Score - Keep track of your hosehould's chores!",
+	"start_url": "/",
+	"background_color": "#8EDC8F",
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#8EDC8F",
+	"description": "Keep track of your hosehould's chores!"
+}
