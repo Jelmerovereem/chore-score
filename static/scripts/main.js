@@ -7,6 +7,13 @@ import { allChoresElements, closeModalBtn, imgEl, evidencePicInput, modalSaveBtn
 import openModal from "./modules/openChoreModal.js";
 import closeChoreModal from "./modules/closeChoreModal.js";
 import saveChore from "./modules/saveChore.js";
+import triggerNotification from "./modules/sendNotification.js";
+
+export const triggerNotificationBtn = document.querySelector(".notificationBtn");
+
+if (triggerNotificationBtn) {
+	triggerNotificationBtn.addEventListener("click", triggerNotification);
+}
 
 if (loginBtn) loginBtn.addEventListener("click", login);
 

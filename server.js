@@ -6,6 +6,9 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 
+//require webpush
+const webPush = require("web-push");
+
 // require mongodb
 const mongo = require("mongodb");
 
@@ -14,6 +17,10 @@ const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({
   extended: true
 });
+
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+webPush.setVapidDetails("mailto:jelmer_overeem@hotmail.com", publicVapidKey, privateVapidKey);
 
 
 // init app
@@ -40,6 +47,17 @@ app.get("/signout", signout);
 app.post("/checkLogin", checkLogin);
 app.post("/changePic", changeProfilePic);
 app.post("/saveChore", saveChore);
+app.post("/sendPush", (req, res) => {
+	const subscription = req.body;
+
+	res.status(201).json({});
+
+	const payload = JSON.stringify({
+		title: "Push notifications with service workers",
+	});
+
+	webPush.sendNotification(subscription, payload).catch(err => console.error(err));
+})
 
 const url = process.env.DB_HOST + ':' + process.env.DB_PORT;
 
