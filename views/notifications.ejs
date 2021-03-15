@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ChoreScore - notificaties</title>
+</head>
+<%- include("partials/head") %>
+<body>
+	<%- include("partials/nav") %>
+	<header>
+		<div class="flex">
+			<h1>Notificaties</h1>
+			<%- include("partials/notificationsLink") %>
+		</div>
+	</header>
+	<main>
+		<p class="subtitle">Notificaties</p>
+		<div class="container">		
+			<% notifications.forEach(function(notification) { %>
+				<%= notification.type %>
+			<% }) %>
+		</div>
+	</main>
+</body>
+</html>

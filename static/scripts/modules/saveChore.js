@@ -15,7 +15,7 @@ export default function saveChore() {
 
 	if (choreTitle.innerText != "" && modalDatePicker.value != "" && imgEl.src != "") {
 		const roomName = room.innerText;
-		const amountPoints = points.innerText++;
+		const amountPoints = parseInt(points.innerText);
 		const choreName = choreTitle.innerText;
 		const dateAndTime = modalDatePicker.value;
 		const evidencePicUrl = imgEl.src;

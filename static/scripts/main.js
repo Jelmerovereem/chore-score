@@ -24,7 +24,6 @@ if (imgInput && uploadImg) imgInput.addEventListener("change", async () => {
 });
 
 if (allChoresElements && openModal) {
-	console.log(allChoresElements)
 	allChoresElements.forEach((chore) => {
 		chore.addEventListener("click", openModal);
 	})
@@ -41,5 +40,9 @@ if (modalSaveBtn) modalSaveBtn.addEventListener("click", async () => {
 	if (choreData) {
 		const savedChore = await postFetch("/saveChore", JSON.stringify(choreData));
 		console.log(savedChore);
+		if (savedChore.status === "ok") {
+			alert("Klus is opgeslagen!")
+			closeChoreModal();
+		}
 	}
 });

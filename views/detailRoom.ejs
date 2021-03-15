@@ -16,10 +16,12 @@
 		<p class="subtitle">Klusjes</p>
 		<div class="container chores">
 			<% room.chores.forEach(function(chore) { %>
-				<a href="javascript:void(0)" data-choreName="<%= chore.choreName %>">
-					<span><%= chore.choreName %></span>
-					<span class="points"><%= chore.points %></span>
-				</a>
+				<% if (chore.accepted) { %>
+					<a href="javascript:void(0)" data-choreName="<%= chore.choreName %>">
+						<span><%= chore.choreName %></span>
+						<span class="points"><%= chore.points %></span>
+					</a>
+				<% } %>
 			<% }) %>
 		</div>
 		<div class="choreModal" style="display: none;">

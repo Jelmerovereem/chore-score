@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An web-app to keep track of your household's chores.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
