@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ChoreScore - notificaties</title>
+	<script src="scripts/notifications.js" type="module" defer></script>
 </head>
 <%- include("partials/head") %>
 <body>
@@ -18,7 +19,9 @@
 		<p class="subtitle">Notificaties</p>
 		<div class="container">		
 			<% notifications.forEach(function(notification) { %>
-				<%= notification.type %>
+				<% if (notification.household === userData.household) { %>
+					<p class="notification" data-notification-id="<%= notification.id %>"><%= notification.mainUser %> - <%= notification.chore.choreName %></p>
+				<% } %>
 			<% }) %>
 		</div>
 	</main>

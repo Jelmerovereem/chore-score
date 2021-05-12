@@ -1,13 +1,14 @@
 import { loginBtn } from "./utils/loginUtils.js";
 import login from "./modules/login.js";
 import { imgInput, uploadBtn } from "./utils/profileUtils.js";
-import { postFetch } from "./modules/fetches.js";
+import { getFetch, postFetch } from "./modules/fetches.js";
 import uploadImg from "./modules/uploadImg.js";
 import { allChoresElements, closeModalBtn, imgEl, evidencePicInput, modalSaveBtn } from "./utils/detailRoomUtils.js";
 import openModal from "./modules/openChoreModal.js";
 import closeChoreModal from "./modules/closeChoreModal.js";
 import saveChore from "./modules/saveChore.js";
 import triggerNotification from "./modules/sendNotification.js";
+import { notificationsLink, amountNotifications } from "./utils/headerUtils.js";
 
 export const triggerNotificationBtn = document.querySelector(".notificationBtn");
 
@@ -46,3 +47,25 @@ if (modalSaveBtn) modalSaveBtn.addEventListener("click", async () => {
 		}
 	}
 });
+
+if (notificationsLink) {
+	getFetch("/getNotifications").then(response => {
+		const thisUser = localStorage.getItem("userName") || "";
+		if (response.status === "ok") {
+			const seenNotifications = JSON.parse(localStorage.getItem("seenNotifications")) || [];
+			let notSeenCounter = 0;
+			response.notifications.forEach(notification => {
+				notification.id = notification.id.toString();
+				if (!seenNotifications.includes(notification.id) && notification.mainUser !== thisUser) {
+					notSeenCounter++;
+				}
+			})
+			amountNotifications.textContent = notSeenCounter;
+		} else {
+			if (thisUser === "jelmer") {
+				alert(`Notificaties ophalen is mislukt. ${response.msg}`)
+				console.log(response)
+			}	
+		}
+	})
+}

@@ -43,6 +43,7 @@ import changeProfilePic from "./modules/changeProfilePic.js"
 import saveChore from "./modules/saveChore.js";
 import createUser from "./modules/createUser.js";
 import addNotification from "./modules/helpers/addNotification.js";
+import getNotifications from "./modules/getNotifications.js";
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
@@ -57,6 +58,7 @@ app.set("view engine", "ejs");
 
 routes();
 
+app.get("/getNotifications", getNotifications);
 app.post("/checkLogin", checkLogin);
 app.post("/changePic", changeProfilePic);
 app.post("/saveChore", saveChore);
