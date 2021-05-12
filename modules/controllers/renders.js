@@ -66,7 +66,6 @@ async function renderNotifications(req, res) {
 		res.redirect("/login");
 	} else {
 		const notifications = await db.collection("notifications").find().toArray();
-		console.log(notifications);
 
 		res.render("notifications.ejs", {
 			userData: req.session.user,
