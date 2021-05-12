@@ -26,9 +26,12 @@ export default async function saveChore(req, res) {
 				sendResponse(req, res, {status: "ok"});
 				let now = new Date();
 				let notificationDateTime = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}T${now.getHours()}-${now.getMinutes()<10?"0":""}${now.getMinutes()}`;
+				let randomId = () => Math.floor(Math.random()* 9999);
 				let notificationObj = {
+					id: randomId(),
 					notificationDateTime,
 					mainUser: req.session.user.userName,
+					household: req.session.user.household,
 					type: "added-chore",
 					choreDateTime: req.body.dateAndTime,
 					chore: req.body
